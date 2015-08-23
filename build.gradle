@@ -26,6 +26,8 @@ targetCompatibility = 1.8
 dependencies {
     compile(
             "org.springframework.boot:spring-boot-starter-web",
+            "org.springframework.boot:spring-boot-starter-data-jpa",
+            'com.h2database:h2',
             'com.google.guava:guava:18.0'
     )
     compile("org.springframework.boot:spring-boot-starter-actuator")
