@@ -33,13 +33,18 @@ public class PetController {
     }
 
     @RequestMapping(value="/{id}", method = RequestMethod.PUT)
-    public Pet update(@PathVariable String id, @RequestBody PetDTO pet){
-        Pet one = petRepository.findOne(Long.valueOf(id));
+    public Pet update(@PathVariable long id, @RequestBody PetDTO pet){
+        Pet one = petRepository.findOne(id);
         Pet transformedPet = PetTransformer.transform(pet);
 
         one.name = transformedPet.name;
         one.gender = transformedPet.gender;
         one.type = transformedPet.type;
         return petRepository.save(one);
+    }
+
+    @RequestMapping(value="/{id}", method=RequestMethod.DELETE)
+    public void delete(@PathVariable long id) {
+        petRepository.delete(id);
     }
 }
