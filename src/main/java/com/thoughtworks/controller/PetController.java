@@ -1,13 +1,12 @@
 package com.thoughtworks.controller;
 
 import com.google.common.collect.Lists;
-import com.thoughtworks.model.Gender;
+import com.thoughtworks.dto.PetDTO;
 import com.thoughtworks.model.Pet;
 import com.thoughtworks.repository.PetRepository;
+import com.thoughtworks.transformer.PetTransformer;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -24,7 +23,23 @@ public class PetController {
 
     @RequestMapping(method = RequestMethod.GET)
     public List<Pet> list() {
-        petRepository.findAll();
-        return Lists.newArrayList(new Pet("Puppy", Gender.MALE, "dog"), new Pet("Brain", Gender.FEMALE, "cat"));
+        return Lists.newArrayList(petRepository.findAll());
+    }
+
+    @RequestMapping(method = RequestMethod.POST)
+    public long save(@RequestBody PetDTO pet) {
+        Pet savedPet = petRepository.save(PetTransformer.transform(pet));
+        return savedPet.id;
+    }
+
+    @RequestMapping(value="/{id}", method = RequestMethod.PUT)
+    public Pet update(@PathVariable String id, @RequestBody PetDTO pet){
+        Pet one = petRepository.findOne(Long.valueOf(id));
+        Pet transformedPet = PetTransformer.transform(pet);
+
+        one.name = transformedPet.name;
+        one.gender = transformedPet.gender;
+        one.type = transformedPet.type;
+        return petRepository.save(one);
     }
 }
