@@ -31,7 +31,11 @@ dependencies {
             'com.google.guava:guava:18.0'
     )
     compile("org.springframework.boot:spring-boot-starter-actuator")
-    testCompile("junit:junit")
+    testCompile(
+            "junit:junit",
+            'org.springframework.boot:spring-boot-starter-test:1.2.5.RELEASE',
+            'com.jayway.restassured:rest-assured:2.5.0'
+    )
 }
 
 task wrapper(type: Wrapper) {

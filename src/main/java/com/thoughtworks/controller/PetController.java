@@ -6,6 +6,7 @@ import com.thoughtworks.model.Pet;
 import com.thoughtworks.repository.PetRepository;
 import com.thoughtworks.transformer.PetTransformer;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -26,14 +27,19 @@ public class PetController {
         return Lists.newArrayList(petRepository.findAll());
     }
 
-    @RequestMapping(method = RequestMethod.POST)
-    public long save(@RequestBody PetDTO pet) {
-        Pet savedPet = petRepository.save(PetTransformer.transform(pet));
-        return savedPet.id;
+    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
+    public Pet fetch(@PathVariable long id) {
+        return petRepository.findOne(id);
     }
 
-    @RequestMapping(value="/{id}", method = RequestMethod.PUT)
-    public Pet update(@PathVariable long id, @RequestBody PetDTO pet){
+    @RequestMapping(method = RequestMethod.POST)
+    public Pet save(@RequestBody PetDTO pet) {
+        Pet savedPet = petRepository.save(PetTransformer.transform(pet));
+        return savedPet;
+    }
+
+    @RequestMapping(value = "/{id}", method = RequestMethod.PUT)
+    public Pet update(@PathVariable long id, @RequestBody PetDTO pet) {
         Pet one = petRepository.findOne(id);
         Pet transformedPet = PetTransformer.transform(pet);
 
@@ -43,7 +49,8 @@ public class PetController {
         return petRepository.save(one);
     }
 
-    @RequestMapping(value="/{id}", method=RequestMethod.DELETE)
+    @ResponseStatus(value = HttpStatus.NO_CONTENT)
+    @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
     public void delete(@PathVariable long id) {
         petRepository.delete(id);
     }
