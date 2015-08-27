@@ -1,3 +1,7 @@
 $(document).ready(function(){
-    $('.main').append('<h2>Hello jQuery!</h2>');
+    $('#userInput').keyup(function(){
+        var input = $('#userInput').val();
+        $('#display').text(input);
+    });
+
 });
