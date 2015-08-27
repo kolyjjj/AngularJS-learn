@@ -1,7 +1,9 @@
 $(document).ready(function(){
-    $('#userInput').keyup(function(){
-        var input = $('#userInput').val();
-        $('#display').text(input);
+    var userInput = $('#userInput');
+    var display = $('#display');
+
+    userInput.keyup(function(){
+        display.text(userInput.val());
     });
 
 });
