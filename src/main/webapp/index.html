@@ -17,21 +17,16 @@
     </ul>
 </div>
 <hr/>
-<div class="angular" ng-app="app" ng-controller="oneController">
-    <h3>angular:</h3>
-    <label>Enter:</label>
-    <input type="text" ng-model="input"/>
-
-    <p ng-bind="input"></p>
-    <label>Pets:</label>
-    <ul>
-        <li ng-repeat="pet in pets">{{pet.name}}</li>
-    </ul>
+<div class="angular" ng-app="app">
+    <header style="background-color: rgba(0, 128, 128, 0.37);text-align:center;">I am header</header>
+    <div ng-view></div>
+    <footer style="background-color: rgba(0, 128, 128, 0.37); text-align:center">I am footer</footer>
 </div>
 
 
 <script src="./scripts/libs/jquery-2.1.4.js"></script>
 <script src="./scripts/libs/angular.js"></script>
+<script src="./scripts/libs/angular-route.js"></script>
 <script src="./scripts/jquery-way.js"></script>
 <script src="./scripts/angular-way.js"></script>
 </body>
