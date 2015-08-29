@@ -5,5 +5,5 @@
 <p ng-bind="input"></p>
 <label>Pets:</label>
 <ul>
-    <li ng-repeat="pet in pets">{{pet.name}}</li>
+    <li ng-repeat="pet in pets"><a href="#/pets/{{pet.id}}">{{pet.name}}</a></li>
 </ul>
