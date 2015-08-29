@@ -9,7 +9,9 @@ $(document).ready(function(){
     $.ajax({
         url: '/api/pets',
         success: function(pets){
-            console.log('pets', pets);
+            for (var i in pets) {
+                $('ul#pets').append('<li>' + pets[i].name + '</li>');
+            }
         }
     });
 });
