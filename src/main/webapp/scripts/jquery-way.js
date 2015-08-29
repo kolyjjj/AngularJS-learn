@@ -6,4 +6,10 @@ $(document).ready(function(){
         display.text(userInput.val());
     });
 
+    $.ajax({
+        url: '/api/pets',
+        success: function(pets){
+            console.log('pets', pets);
+        }
+    });
 });
