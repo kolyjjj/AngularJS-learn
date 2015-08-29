@@ -72,13 +72,13 @@ public class PetsTest {
 
     @Test
     public void canFetchMickey() {
-        int id = 1;
+        long id = mickey.id;
         when().
                 get("/api/pets/{id}", id).
                 then().
                 statusCode(HttpStatus.OK.value()).
                 body("name", Matchers.is("Mickey Mouse")).
-                body("id", Matchers.is(id));
+                body("id", Matchers.is((int) id));
     }
 
     @Test

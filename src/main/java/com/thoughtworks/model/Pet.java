@@ -1,9 +1,6 @@
 package com.thoughtworks.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 public class Pet {
@@ -12,6 +9,7 @@ public class Pet {
     public long id;
 
     public String name;
+    @Enumerated(value = EnumType.STRING)
     public Gender gender;
     public String type;
 
