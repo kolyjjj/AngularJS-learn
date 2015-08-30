@@ -31,15 +31,21 @@ angular.module('app')
                 $location.path('pets');
             };
         }])
-        .directive('petDetail', function(){
+        .directive('petDetail', ['$location', function($location){
             return {
                 restrict: 'E',
-                scope: {},
+                scope: {
+                    pet: '='
+                },
                 templateUrl: '/views/partials/pet-detail.html',
                 link: function(scope){
+                    console.log('scope.pet', scope.pet);
+                    scope.back = function(){
+                        $location.path('pets');
+                    };
                 }
             };
-        })
+        }])
         .factory('petService', ['$http', function($http){
             return {
                 pets: pets,
