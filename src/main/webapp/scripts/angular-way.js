@@ -27,7 +27,8 @@ angular.module('app')
             petService.pet($routeParam.id).then(function(response){
                 $scope.pet = response.data;
             });
-            $scope.back = function(){
+            $scope.back = function(yourName){
+                console.log('who are you?', yourName);
                 $location.path('pets');
             };
         }])
@@ -36,11 +37,12 @@ angular.module('app')
                 restrict: 'E',
                 scope: {
                     pet: '=',
-                    back: '&'
+                    backFunc: '&'
                 },
                 templateUrl: '/views/partials/pet-detail.html',
                 link: function(scope){
                     console.log('scope.pet', scope.pet);
+                    console.log('scope.backFunc', scope.backFunc);
                 }
             };
         }])
