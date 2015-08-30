@@ -34,6 +34,7 @@ angular.module('app')
         .directive('petDetail', function(){
             return {
                 restrict: 'E',
+                scope: true,
                 templateUrl: '/views/partials/pet-detail.html',
                 link: function(scope){
                 }
