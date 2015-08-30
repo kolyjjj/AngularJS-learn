@@ -31,6 +31,14 @@ angular.module('app')
                 $location.path('pets');
             };
         }])
+        .directive('petDetail', function(){
+            return {
+                restrict: 'E',
+                templateUrl: '/views/partials/pet-detail.html',
+                link: function(scope){
+                }
+            };
+        })
         .factory('petService', ['$http', function($http){
             return {
                 pets: pets,
