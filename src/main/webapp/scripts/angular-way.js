@@ -35,14 +35,12 @@ angular.module('app')
             return {
                 restrict: 'E',
                 scope: {
-                    pet: '='
+                    pet: '=',
+                    back: '&'
                 },
                 templateUrl: '/views/partials/pet-detail.html',
                 link: function(scope){
                     console.log('scope.pet', scope.pet);
-                    scope.back = function(){
-                        $location.path('pets');
-                    };
                 }
             };
         }])
