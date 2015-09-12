@@ -1,7 +1,9 @@
 angular.module('app', ['ngRoute']);
 
 angular.module('app')
-        .config(['$routeProvider', function($routeProvider){
+        .config(['$routeProvider', 'petServiceProvider', function($routeProvider, petServiceProvider){
+            petServiceProvider.setUrl('http://localhost:8080/api');
+
             $routeProvider
               .when('/pets', {
                 templateUrl: 'views/pet/pets.html',
@@ -31,17 +33,39 @@ angular.module('app')
                 $location.path('pets');
             };
         }])
-        .factory('petService', ['$http', function($http){
-            return {
-                pets: pets,
-                pet: pet
+        .provider('petService', function(){
+            var url = 'http://localhost:8080/';
+
+            this.setUrl = function(val) {
+                url = val;
             };
 
-            function pets(){
-                return $http.get('/api/pets');
-            }
+            this.$get = ['$http', function($http){
+                return {
+                    pets: pets,
+                    pet: pet
+                };
 
-            function pet(id) {
-                return $http.get('/api/pets/' + id);
-            }
-        }]);
+                function pets(){
+                    return $http.get(url + '/pets');
+                }
+
+                function pet(id) {
+                    return $http.get(url + '/pets/' + id);
+                }
+            }];
+        });
+//        .factory('petService', ['$http', function($http){
+//            return {
+//                pets: pets,
+//                pet: pet
+//            };
+//
+//            function pets(){
+//                return $http.get('/api/pets');
+//            }
+//
+//            function pet(id) {
+//                return $http.get('/api/pets/' + id);
+//            }
+//        }]);
