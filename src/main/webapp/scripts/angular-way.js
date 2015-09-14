@@ -41,6 +41,10 @@ angular.module('app')
                 },
                 templateUrl: '/views/partials/pet-detail.html',
                 link: function(scope){
+
+                    scope.$watch(function(){
+                        console.log('digesting...');
+                    });
                     console.log('scope.pet', scope.pet);
                     console.log('scope.backFunc', scope.backFunc);
                 }
