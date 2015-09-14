@@ -39,7 +39,8 @@ angular.module('app')
                     pet: '=',
                     backFunc: '&'
                 },
-                templateUrl: '/views/partials/pet-detail.html',
+                template: '<section><h3>Pet {{pet.name}} detail:</h3><ul><li><label>name:</label><span>{{pet.name}}</span></li><li><label>gender:</label><span>{{pet.gender}}</span></li><li><label>type:</label><span>{{pet.type}}</span></li></ul><button ng-click="backFunc({message: \'koly\'})">back</button></section>',
+//                templateUrl: '/views/partials/pet-detail.html',
                 link: function(scope){
 
                     scope.$watch(function(){
@@ -57,7 +58,9 @@ angular.module('app')
             };
 
             function pets(){
-                return $http.get('/api/pets');
+                var promise = $http.get('/api/pets');
+                console.log('promise', promise);
+                return promise;
             }
 
             function pet(id) {

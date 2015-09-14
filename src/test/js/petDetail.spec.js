@@ -4,7 +4,7 @@ describe('pet detail directive', function(){
     beforeEach(module('app'));
 
     beforeEach(inject(function(_$compile_, _$rootScope_, _$templateCache_){
-        _$templateCache_.put('/views/partials/pet-detail.html', '<section><h3>Pet {{pet.name}} detail:</h3><ul><li><label>name:</label><span>{{pet.name}}</span></li><li><label>gender:</label><span>{{pet.gender}}</span></li><li><label>type:</label><span>{{pet.type}}</span></li></ul><button ng-click="backFunc({message: \'koly\'})">back</button></section>');
+//        _$templateCache_.put('/views/partials/pet-detail.html', '<section><h3>Pet {{pet.name}} detail:</h3><ul><li><label>name:</label><span>{{pet.name}}</span></li><li><label>gender:</label><span>{{pet.gender}}</span></li><li><label>type:</label><span>{{pet.type}}</span></li></ul><button ng-click="backFunc({message: \'koly\'})">back</button></section>');
     
         scope = _$rootScope_.$new();
         scope.pet = {
@@ -15,10 +15,12 @@ describe('pet detail directive', function(){
         };
         scope.back = function(){};
         console.log('compiling');
-        element = _$compile_('<pet-detail pet="pet" back-func="back()"></pet-detail>')(scope);
-        console.log('compiling done');
+        var linkFunc = _$compile_('<pet-detail pet="pet" back-func="back()"></pet-detail>');
+        console.log('link func', linkFunc);
+        element = linkFunc(scope);
+        console.log('compiling done', element.html());
         scope.$digest();
-        console.log('first digesting..');
+        console.log('first digesting..', element.html());
     }));
 
     it('should show pet details', function(){
