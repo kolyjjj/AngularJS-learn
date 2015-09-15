@@ -15,6 +15,7 @@ module.exports = function(config) {
 
     // list of files / patterns to load in the browser
     files: [
+      'src/main/webapp/scripts/libs/jquery-2.1.4.js',
       'src/main/webapp/scripts/libs/angular.js',
       'src/main/webapp/scripts/libs/angular-route.js',
       'src/main/webapp/scripts/libs/angular-mocks.js',
@@ -25,7 +26,6 @@ module.exports = function(config) {
 
     // list of files to exclude
     exclude: [
-      'src/main/webapp/scripts/libs/jquery-2.1.4.js'
     ],
 
 
